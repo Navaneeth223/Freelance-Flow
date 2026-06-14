@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds — layered depth */
+  --bg-base:        #0A0A0F;   /* near-black canvas */
+  --bg-surface:     #111118;   /* card surfaces */
+  --bg-elevated:    #18181F;   /* modals, popovers */
+  --bg-overlay:     #1E1E28;   /* hover states, subtle panels */
+
+  /* Brand Accent — Electric Indigo */
+  --accent-primary:    #6C63FF;   /* primary buttons, active states */
+  --accent-glow:       #6C63FF33; /* glow effect (20% opacity) */
+  --accent-secondary:  #A78BFA;   /* secondary highlights */
+  --accent-dim:        #6C63FF1A; /* very subtle tint backgrounds */
+
+  /* Status Colors */
+  --status-success:  #22C55E;
+  --status-warning:  #F59E0B;
+  --status-danger:   #EF4444;
+  --status-info:     #3B82F6;
+
+  /* Text Hierarchy */
+  --text-primary:    #F1F0FF;   /* headings, key data */
+  --text-secondary:  #A0A0B8;   /* subtext, labels */
+  --text-muted:      #52526A;   /* placeholders, disabled */
+  --text-inverse:    #0A0A0F;   /* text on light buttons */
+
+  /* Borders */
+  --border-subtle:   #1E1E28;
+  --border-default:  #2A2A38;
+  --border-strong:   #3A3A50;
+  --border-accent:   #6C63FF55;
+
+  /* Shadows */
+  --shadow-card:     0 1px 3px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-elevated: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(108,99,255,0.08);
+  --shadow-glow:     0 0 20px rgba(108,99,255,0.25), 0 0 60px rgba(108,99,255,0.1);
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-2xl: 28px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-overlay: var(--bg-overlay);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-glow: var(--accent-glow);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-dim: var(--accent-dim);
+
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
+  --color-status-danger: var(--status-danger);
+  --color-status-info: var(--status-info);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-accent: var(--border-accent);
+
+  --font-display: 'Cal Sans', 'Inter', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-glow: var(--shadow-glow);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Glow Blob background utility */
+.glow-blob {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
