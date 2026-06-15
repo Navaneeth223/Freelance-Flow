@@ -1,7 +1,36 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-const UserSchema = new Schema({
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password?: string;
+  avatar: string;
+  googleId?: string;
+  businessName: string;
+  businessLogo: string;
+  tagline: string;
+  phone: string;
+  website: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    zip: string;
+  };
+  currency: string;
+  currencySymbol: string;
+  timezone: string;
+  defaultTaxRate: number;
+  invoicePrefix: string;
+  nextInvoiceNumber: number;
+  plan: 'free' | 'pro' | 'business';
+  planExpiresAt: Date;
+  comparePassword(enteredPassword: string): Promise<boolean>;
+}
+
+const UserSchema = new Schema<IUser>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String },
@@ -55,5 +84,6 @@ UserSchema.methods.comparePassword = async function (enteredPassword: string): P
   return bcrypt.compare(enteredPassword, this.password);
 };
 
-export const User = model('User', UserSchema);
+export const User = model<IUser>('User', UserSchema);
 export default User;
+

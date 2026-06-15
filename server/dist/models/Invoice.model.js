@@ -32,6 +32,7 @@ const InvoiceSchema = new mongoose_1.Schema({
     amountPaid: { type: Number, default: 0 },
     amountDue: { type: Number, required: true, default: 0 },
     currency: { type: String, default: 'INR' },
+    currencySymbol: { type: String, default: '₹' },
     notes: { type: String, default: '' },
     termsAndConditions: { type: String, default: '' },
     // Tracking details
